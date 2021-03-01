@@ -1,0 +1,41 @@
+Question
+Implement an algorithm to determine if the string has all unique characters
+
+  Approach1:
+  Use Hash table to map each character and return false when you find the key already present in the hashtable
+  Time Complexity O(n)
+  Space Complexity O(n)
+  
+  or of the characters are ASCII 128 then just create an array of 128 elements and map them
+  
+  Approach 2:
+  -Sort the array and then traverse to find two consecutive elements which are same
+  
+  Approach 3:
+  Using Bit Vector
+  Here we can reduce the space by a margin of 8 in the approach 1
+  we traverse through the array and find the value of (char - 'a') and then set (char - 'a')th bit as 1 by ORing with a variable.
+  And we use a condition when anding a new character is more than 1 then we found a duplicate
+  
+  code:
+  
+  boolean isUniqueChar(string str)
+  {
+  
+    inte chacker=0;
+    for (int i=0;i<str.size();i++)
+    {
+      int val=str[i]-'a';
+      
+      if(checker & (1<<val) > 0)  // checking if bit at position val is set if yes then we know that the current char is duplicate
+        return false;
+        
+      checker = checker || 1<<val ;    //set the nth bit by ORing
+    }
+    
+    return true;
+    
+  
+  }
+  
+  
